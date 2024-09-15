@@ -17,7 +17,7 @@ async function pswd(password){
 async function Signup(req,res){
     const r = sinup.safeParse(req.body)
     if(!r.success){
-        res.status(401).json({
+        return res.status(401).json({
             msg: "Why are you doing something that you shouldn't do"
         })
     }
@@ -44,7 +44,7 @@ async function Signup(req,res){
             const userId =  newUser._id
             const acc  = await Account.create({
                 userId,
-                balance: 1+ Math.random()*10000
+                balance: 10000
             })
             const token  = jwt.sign({
                 userId
@@ -74,8 +74,9 @@ async function Signup(req,res){
  
 async function Signin(req,res){
     const r = sinin.safeParse(req.body)
+    console.log(req.body)
     if(!r.success){
-        res.status(401).json({
+        return res.status(401).json({
             msg: "Why are you doing something that you shouldn't do"
         })
     }
@@ -97,7 +98,7 @@ async function Signin(req,res){
                 token
                })
             }else{
-                return res.status(400).json({
+                return res.status(400).json({ 
                     msg: "Wrong Password"
                 })
             }

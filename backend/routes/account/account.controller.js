@@ -23,6 +23,7 @@ async function getBal(req,res){
 }
 async function transferBal(req,res){
     const r = ts.safeParse(req.body);
+    console.log(req.body.to)
     if(!r.success){
             return res.json({
                     msg: "Invalid Inputs"
